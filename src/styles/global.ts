@@ -18,21 +18,32 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-size: 1rem;
+    font-size: 16px;
     font-family: 'Sora', sans-serif;
     font-weight: 500;
-    color: ${({ theme }) => theme.gray};
+    color: ${({ theme }) => theme.gray[800]};
     background: ${({ theme }) => theme.backgound};
   }
 
   button {
+    font-size: 16px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 500;
     border: 0;
     outline: 0;
     cursor: pointer;
   }
 
   input {
+    font-size: 16px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 500;
     border: 0;
     outline: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.gray[800]};
   }
 `;

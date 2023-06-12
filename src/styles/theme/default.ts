@@ -1,7 +1,6 @@
 export const defaultTheme = {
   white: '#FFFFFF',
   backgound: '#F6F5FC',
-  gray: '#333333',
 
   primary: {
     light: '#',
@@ -14,4 +13,9 @@ export const defaultTheme = {
     main: '#FC5050',
     dark: '#',
   },
+
+  gray: {
+    200: '#BCBCBC',
+    800: '#333333'
+  }
 };
