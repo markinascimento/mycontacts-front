@@ -1,3 +1,6 @@
+// -> Import da lib externa de Navegação
+import { Link } from 'react-router-dom';
+
 // -> Import da lib externa de Icons
 import { PencilLine, Trash } from '@phosphor-icons/react';
 
@@ -22,9 +25,9 @@ export function Contact() {
       </Details>
 
       <Actions>
-        <a href="/">
+        <Link to="/edit/123">
           <PencilLine size={20} color='#5061FC' weight='bold'/>
-        </a>
+        </Link>
 
         <button type='button' className='delete'>
           <Trash size={20} color='#FC5050' weight='bold'/>

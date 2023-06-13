@@ -3,15 +3,16 @@ export const defaultTheme = {
   backgound: '#F6F5FC',
 
   primary: {
-    light: '#',
+    lighter: '#E0E3FF',
+    light: '#7C98FF',
     main: '#5061FC',
-    dark: '#',
+    dark: '#2439FD',
   },
 
   danger: {
-    light: '#',
+    light: '#FC7B7B',
     main: '#FC5050',
-    dark: '#',
+    dark: '#FB2A2A',
   },
 
   gray: {

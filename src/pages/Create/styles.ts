@@ -1,3 +1,3 @@
 import styled from 'styled-components';
 
-export const Form = styled.div``;
+export const CreateContainer = styled.div``;

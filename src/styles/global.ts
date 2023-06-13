@@ -34,7 +34,7 @@ export const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 
-  input {
+  input, select {
     font-size: 16px;
     font-family: 'Sora', sans-serif;
     font-weight: 500;
