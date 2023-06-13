@@ -52,7 +52,10 @@ export const BodyContent = styled.div`
   overflow: auto;
 `;
 
-export const OrderName = styled.div`
+interface OrderNameProps {
+  orderBy: string;
+}
+export const OrderName = styled.div<OrderNameProps>`
   display: flex;
   width: 100%;
   align-items: center;
@@ -67,6 +70,11 @@ export const OrderName = styled.div`
 
     strong {
       color: ${({ theme }) => theme.primary.main};
+    }
+
+    svg {
+      transition: transform .3s ease-in-out;
+      transform: ${({ orderBy }) => orderBy === 'ASC' ? 'rotate(0)' : 'rotate(180deg)'}
     }
   }
 `;
