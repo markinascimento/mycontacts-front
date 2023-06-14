@@ -10,17 +10,19 @@ import { ButtonContainer } from './styles';
 // -> Tipando as props do Component
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
-  isLoading?: boolean
   disabled?: boolean
+  isLoading?: boolean
+  isDanger?: boolean
 }
 
 export function Button({
   children,
+  disabled = false,
+  isDanger = false,
   isLoading = false,
-  disabled = false
 }: ButtonProps) {
   return (
-    <ButtonContainer disabled={disabled}>
+    <ButtonContainer isDanger={isDanger} disabled={disabled}>
       {isLoading
         ? <InfinitySpin color='#FFFFFF' width='128' />
         : <span> {children} </span>

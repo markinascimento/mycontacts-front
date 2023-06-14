@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 // -> Import da lib externa de Icons
 import { ArrowUp } from '@phosphor-icons/react';
 
+// -> Import dos Component
+import { Contact } from '../../components/Contact';
+
 // -> Import do CSS
 import {
   InputFilter,
@@ -15,7 +18,6 @@ import {
   BodyContent,
   ListContacts
 } from './styles';
-import { Contact } from '../../components/Contact';
 
 export function Home() {
   const [filter, setFilter] = useState<string>('');
@@ -36,7 +38,10 @@ export function Home() {
       />
 
       <Header>
-        <strong> 3 Contactos </strong>
+        <strong>
+          {contacts.length}
+          {contacts.length > 1 ? ' Contatos' : ' Contato'}
+        </strong>
         <Link to="/create" className='new-contact'>
           Novo contato
         </Link>

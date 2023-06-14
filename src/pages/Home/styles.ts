@@ -55,6 +55,7 @@ export const BodyContent = styled.div`
 interface OrderNameProps {
   orderBy: string;
 }
+
 export const OrderName = styled.div<OrderNameProps>`
   display: flex;
   width: 100%;

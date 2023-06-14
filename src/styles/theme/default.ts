@@ -1,18 +1,19 @@
 export const defaultTheme = {
   white: '#FFFFFF',
   backgound: '#F6F5FC',
+  green: '#51CA73',
 
   primary: {
     lighter: '#E0E3FF',
-    light: '#7C98FF',
+    light: '#6674F4',
     main: '#5061FC',
     dark: '#2439FD',
   },
 
   danger: {
-    light: '#FC7B7B',
+    light: '#F97171',
     main: '#FC5050',
-    dark: '#FB2A2A',
+    dark: '#F63131',
   },
 
   gray: {

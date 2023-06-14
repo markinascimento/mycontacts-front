@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 
-export const ButtonContainer = styled.button`
+interface ButtonContainerProps {
+  isDanger: boolean;
+}
+
+export const ButtonContainer = styled.button<ButtonContainerProps>`
   display: flex;
-  width: 100%;
   height: 52px;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  background: ${({ theme }) => theme.primary.main};
+  background: ${({ isDanger, theme }) => isDanger ? theme.danger.main : theme.primary.main};
   transition: all .2s ease-in-out;
+  padding: 0 2rem;
 
   span {
     font-weight: 600;
@@ -16,11 +20,11 @@ export const ButtonContainer = styled.button`
   }
 
   &:not(:disabled):hover {
-    background: ${({ theme }) => theme.primary.light};
+    background: ${({ isDanger, theme }) => isDanger ? theme.danger.light : theme.primary.light};
   }
 
   &:active {
-    background: ${({ theme }) => theme.primary.dark};
+    background: ${({ isDanger, theme }) => isDanger ? theme.danger.main : theme.primary.main};
   }
 
   &:disabled {

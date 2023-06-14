@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export default styled.input`
+interface InputProps {
+  error: boolean;
+}
+
+export default styled.input<InputProps>`
   width: 100%;
   height: 52px;
   border: 2px solid ${({ theme }) => theme.white};
@@ -13,4 +17,9 @@ export default styled.input`
   &:focus {
     border-color: ${({ theme }) => theme.primary.main};
   }
+
+  ${({ error }) => error && css`
+    color: ${({ theme }) => theme.danger.main};
+    border-color: ${({ theme }) => theme.danger.main} !important;
+  `}
 `;

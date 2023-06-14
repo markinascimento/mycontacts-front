@@ -1,5 +1,5 @@
 // -> Import do ReactJS
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 
 // -> Import dos Components
 import Input from '../Input';
@@ -10,24 +10,41 @@ import { FormGroup } from '../FormGroup';
 // -> Import do CSS
 import { ContactFormContainer } from './styles';
 
-export function ContactForm() {
+// -> Tipandos as props do component
+interface ContactFormProps {
+  buttonLabel: string;
+}
 
-  function handleSubimtCreate(event: FormEvent) {
+export function ContactForm({ buttonLabel }: ContactFormProps) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [category, setCategory] = useState('');
+  const [loaderButton, setLoaderButton] = useState<boolean>(false);
+
+  async function handleSubimtCreate(event: FormEvent) {
     event.preventDefault();
+    setLoaderButton(true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setLoaderButton(false);
   }
+
+
 
   return (
     <ContactFormContainer onSubmit={handleSubimtCreate}>
       <FormGroup>
-        <Input placeholder='Nome *' />
+        <Input placeholder='Nome *' error/>
+      </FormGroup>
+
+      <FormGroup
+        error='O formato do e-mail é inválido'
+      >
+        <Input placeholder='E-mail *' error />
       </FormGroup>
 
       <FormGroup>
-        <Input placeholder='E-mail *' />
-      </FormGroup>
-
-      <FormGroup>
-        <Input placeholder='Telefone *' />
+        <Input placeholder='Telefone *' error />
       </FormGroup>
 
       <FormGroup>
@@ -38,8 +55,8 @@ export function ContactForm() {
         </Select>
       </FormGroup>
 
-      <Button type='submit'>
-        Cadastrar
+      <Button type='submit' isLoading={loaderButton}>
+        {buttonLabel}
       </Button>
     </ContactFormContainer>
   );

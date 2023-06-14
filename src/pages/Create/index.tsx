@@ -10,7 +10,7 @@ export function Create() {
     <CreateContainer>
       <PageHeader title='Novo contato' />
 
-      <ContactForm />
+      <ContactForm buttonLabel='Cadastrar' />
     </CreateContainer>
   );
 }

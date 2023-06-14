@@ -3,9 +3,10 @@ import styled from 'styled-components';
 export const ContactFormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 
   > button {
-    margin-top: 2rem;
+    width: 100%;
+    margin-top: 1rem;
   }
 `;
