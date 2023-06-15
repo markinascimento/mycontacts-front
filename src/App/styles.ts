@@ -9,4 +9,5 @@ export const AppContainer = styled.main`
   max-width: 500px;
   overflow: hidden;
   margin: 0 auto;
+  padding: 0 1rem;
 `;

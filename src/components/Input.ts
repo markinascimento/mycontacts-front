@@ -13,6 +13,7 @@ export default styled.input<InputProps>`
   border-radius: 4px;
   padding: 0 1rem;
   transition: border-color .2s ease-in-out;
+  appearance: none;
 
   &:focus {
     border-color: ${({ theme }) => theme.primary.main};
