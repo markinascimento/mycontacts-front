@@ -4,28 +4,34 @@ import { Link } from 'react-router-dom';
 // -> Import da lib externa de Icons
 import { PencilLine, Trash } from '@phosphor-icons/react';
 
+// -> Import de funções úteis
+import { formatPhone } from '../../utils/formatPhone';
+
+// -> Import das tipagens
+import { ContactDTO } from '../../types/ContactDTO';
+
 // -> Import do CSS
 import { ContactContainer, Details, Actions } from './styles';
 
 // -> Tipando as props do component
 interface ContactProps {
-  name: string;
+  contact: ContactDTO;
 }
 
-export function Contact() {
+export function Contact({ contact }: ContactProps) {
   return (
     <ContactContainer>
       <Details>
         <div className='social'>
-          <strong> Marcos Vinicius </strong>
-          <small> Instagram </small>
+          <strong> {contact.name} </strong>
+          <small> {contact.category_name} </small>
         </div>
-        <span> marcos@gmail.com </span>
-        <span> 83998689147 </span>
+        <span> {contact.email} </span>
+        <span> {formatPhone(contact.phone)} </span>
       </Details>
 
       <Actions>
-        <Link to="/edit/123">
+        <Link to={`/edit/${contact.id}`}>
           <PencilLine size={20} color='#5061FC' weight='bold'/>
         </Link>
 

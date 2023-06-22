@@ -20,9 +20,10 @@ export function Button({
   disabled = false,
   isDanger = false,
   isLoading = false,
+  ...rest
 }: ButtonProps) {
   return (
-    <ButtonContainer isDanger={isDanger} disabled={disabled}>
+    <ButtonContainer isDanger={isDanger} disabled={disabled} {...rest}>
       {isLoading
         ? <InfinitySpin color='#FFFFFF' width='128' />
         : <span> {children} </span>

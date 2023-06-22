@@ -54,6 +54,11 @@ export function ContactForm({ buttonLabel }: ContactFormProps) {
 
   // -> Manipulador do input de telefone
   function handlePhoneChange(event: ChangeEvent<HTMLInputElement>) {
+    if(event.target.value.length < 15) {
+      setError({ fieldName: 'phone', message: 'Número de telefone inválido' });
+    } else {
+      removeError('phone');
+    }
     setPhone(formatPhone(event.target.value));
   }
 
@@ -65,7 +70,7 @@ export function ContactForm({ buttonLabel }: ContactFormProps) {
     setLoaderButton(false);
   }
 
-  const buttonDisabled = !name || errors.length > 0;
+  const isFormValid = (!name || errors.length > 0);
 
   return (
     <ContactFormContainer onSubmit={handleSubimtCreate}>
@@ -82,20 +87,20 @@ export function ContactForm({ buttonLabel }: ContactFormProps) {
         <Input
           type='email'
           value={email}
-          placeholder='E-mail *'
+          placeholder='E-mail'
           onChange={handleEmailChange}
           error={!!getErrorMessageByFieldName('email')}
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup error={getErrorMessageByFieldName('phone')}>
         <Input
           type='tel'
           value={phone}
-          error={false}
+          placeholder='Telefone'
           maxLength={15}
-          placeholder='Telefone *'
           onChange={handlePhoneChange}
+          error={!!getErrorMessageByFieldName('phone')}
         />
       </FormGroup>
 
@@ -107,7 +112,7 @@ export function ContactForm({ buttonLabel }: ContactFormProps) {
         </Select>
       </FormGroup>
 
-      <Button type='submit' isLoading={loaderButton} disabled={buttonDisabled}>
+      <Button type='submit' isLoading={loaderButton} disabled={isFormValid}>
         {buttonLabel}
       </Button>
     </ContactFormContainer>

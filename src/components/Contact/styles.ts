@@ -27,10 +27,12 @@ export const Details = styled.div`
     gap: 0.5rem;
 
     small {
+      font-size: 0.75rem;
+      font-weight: 600;
       color: ${({ theme }) => theme.gray[800]};
       padding: 2px 8px;
       border-radius: 2px;
-      background: ${({ theme }) => theme.primary.main};
+      background: ${({ theme }) => theme.primary.lighter};
       text-transform: uppercase;
     }
   }
