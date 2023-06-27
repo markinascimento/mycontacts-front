@@ -1,5 +1,18 @@
 // -> Import do ReactJS
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+
+// -> Import dos Custom Hooks
+import useErrors from '../../hooks/useErrors';
+
+// -> Import da API
+import CategoriesServices from '../../services/CategoriesServices';
+
+// -> Import de funções úteis
+import { emailValid } from '../../utils/emailValid';
+import { formatPhone } from '../../utils/formatPhone';
+
+// -> Import das tipagens
+import { CategoryDTO } from '../../types/CategoryDTO';
 
 // -> Import dos Components
 import Input from '../Input';
@@ -9,18 +22,10 @@ import { FormGroup } from '../FormGroup';
 
 // -> Import do CSS
 import { ContactFormContainer } from './styles';
-import useErrors from '../../hooks/useErrors';
-import { emailValid } from '../../utils/emailValid';
-import { formatPhone } from '../../utils/formatPhone';
 
 // -> Tipandos as props do component
 interface ContactFormProps {
   buttonLabel: string;
-}
-
-interface InputChangeProps {
-  event: ChangeEvent<HTMLInputElement>,
-  setState: Dispatch<SetStateAction<string>>
 }
 
 export function ContactForm({ buttonLabel }: ContactFormProps) {
@@ -29,8 +34,23 @@ export function ContactForm({ buttonLabel }: ContactFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [category, setCategory] = useState('');
-  const [loaderButton, setLoaderButton] = useState<boolean>(false);
+  const [categoryID, setCategoryID] = useState('');
+
+  const [categories, setCategories] = useState<CategoryDTO[]>([]);
+  const [loadingButton, setLoadingButton] = useState<boolean>(false);
+  const [loadingCategories, setloadingCategories] = useState<boolean>(true);
+
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const categoriesList = await CategoriesServices.listCategories();
+        setCategories(categoriesList);
+      } catch {} finally {
+        setloadingCategories(false);
+      }
+    }
+    loadCategories();
+  }, []);
 
   // -> Manipulador do input de nome
   function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
@@ -65,11 +85,12 @@ export function ContactForm({ buttonLabel }: ContactFormProps) {
   // -> Função para da o submit no formulário
   async function handleSubimtCreate(event: FormEvent) {
     event.preventDefault();
-    setLoaderButton(true);
+    setLoadingButton(true);
     await new Promise(resolve => setTimeout(resolve, 2000));
-    setLoaderButton(false);
+    setLoadingButton(false);
   }
 
+  // Desabiliar o botão
   const isFormValid = (!name || errors.length > 0);
 
   return (
@@ -104,15 +125,22 @@ export function ContactForm({ buttonLabel }: ContactFormProps) {
         />
       </FormGroup>
 
-      <FormGroup>
-        <Select>
-          <option value="1">Instagram</option>
-          <option value="1">Facebook</option>
-          <option value="1">LinkedIn</option>
+      <FormGroup isLoading={loadingCategories}>
+        <Select
+          value={categoryID}
+          onChange={event => setCategoryID(event.target.value)}
+          disabled={loadingCategories}
+        >
+          <option value="">Selecionar categoria</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
         </Select>
       </FormGroup>
 
-      <Button type='submit' isLoading={loaderButton} disabled={isFormValid}>
+      <Button type='submit' isLoading={loadingButton} disabled={isFormValid}>
         {buttonLabel}
       </Button>
     </ContactFormContainer>

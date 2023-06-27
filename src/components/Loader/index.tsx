@@ -1,8 +1,8 @@
 // -> Import do ReactJS
 import ReactDOM from 'react-dom';
 
-// -> Import da lib externa de Loader
-import { CirclesWithBar } from 'react-loader-spinner';
+// -> Import dos Components
+import { Spinner } from '../Spinner';
 
 // -> Import do CSS
 import { Overlay } from './styles';
@@ -20,13 +20,7 @@ export function Loader({ visible }: LoaderProps) {
 
   return ReactDOM.createPortal(
     <Overlay>
-      <CirclesWithBar
-        height="200"
-        width="200"
-        color="#5061FC"
-        visible={true}
-        ariaLabel='circles-with-bar-loading'
-      />
+      <Spinner visible={visible} />
     </Overlay>,
     document.getElementById('screen-root') as Element | DocumentFragment
   );
